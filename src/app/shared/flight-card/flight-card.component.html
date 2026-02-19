@@ -1,0 +1,40 @@
+<div class="flight-card">
+  <div class="card-header">
+    <div class="airline-info">
+      <h4>{{ flight.airline }}</h4>
+      <p class="flight-number">{{ flight.flightNumber }}</p>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="route">
+      <div class="location">
+        <p class="time">{{ flight.departureTime }}</p>
+        <p class="city">{{ flight.from }}</p>
+      </div>
+      <div class="duration">
+        <p>{{ flight.duration }}</p>
+        <div class="line"></div>
+      </div>
+      <div class="location">
+        <p class="time">{{ flight.arrivalTime }}</p>
+        <p class="city">{{ flight.to }}</p>
+      </div>
+    </div>
+
+    <div class="price-seats">
+      <div class="price">
+        <p class="label">Price</p>
+        <h3>${{ flight.price }}</h3>
+      </div>
+      <div class="seats">
+        <p class="label">Available Seats</p>
+        <p class="seats-count">{{ flight.availableSeats }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button class="btn btn-primary" (click)="onBookClick()">Book Now</button>
+  </div>
+</div>

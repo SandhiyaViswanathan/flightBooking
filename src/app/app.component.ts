@@ -5,8 +5,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'flightBooking';
-}
+export class AppComponent {}

@@ -1,0 +1,46 @@
+<div class="filter-sidebar">
+  <div class="filter-header">
+    <h3>Filters</h3>
+    <button class="clear-btn" (click)="clearFilters()">Clear All</button>
+  </div>
+
+  <!-- Airlines Filter -->
+  <div class="filter-group">
+    <h4>Airline</h4>
+    <div class="filter-options">
+      <label *ngFor="let airline of airlines" class="checkbox">
+        <input type="checkbox" 
+               (change)="toggleAirline(airline)"
+               [checked]="selectedAirlines.has(airline)">
+        <span>{{ airline }}</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Time Slots Filter -->
+  <div class="filter-group">
+    <h4>Departure Time</h4>
+    <div class="filter-options">
+      <label *ngFor="let slot of timeSlots" class="checkbox">
+        <input type="checkbox" 
+               (change)="toggleTimeSlot(slot)"
+               [checked]="selectedTimeSlots.has(slot)">
+        <span>{{ slot }}</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Price Range Filter -->
+  <div class="filter-group">
+    <h4>Max Price</h4>
+    <div class="price-slider">
+      <input type="range" 
+             min="0" 
+             max="1000" 
+             [(ngModel)]="priceRange"
+             (change)="onPriceChange()"
+             class="slider">
+      <p class="price-value">${{ priceRange }}</p>
+    </div>
+  </div>
+</div>

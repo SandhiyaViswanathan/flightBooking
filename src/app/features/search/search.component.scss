@@ -1,0 +1,166 @@
+
+
+$primary-color: #001f5c;
+$primary-hover: #0a2e6e;
+$text-dark: #333;
+$border-light: #e5e5e5;
+$shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+
+.search-container {
+  width: 100%;
+}
+
+.hero-section {
+  position: relative;
+  padding: 100px 20px 120px;
+  text-align: center;
+  color: #fff;
+
+  background: linear-gradient(
+      135deg,
+      rgba(0, 31, 92, 0.85) 0%,
+      #667eead9 100%
+    );
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin: 0;
+      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+
+.search-card {
+  margin-top: -80px;
+  position: relative;
+  z-index: 10;
+
+  .search-form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: $shadow-soft;
+  }
+}
+
+
+.trip-type {
+  border-bottom: 1px solid $border-light;
+  padding-bottom: 16px;
+
+  .form-check {
+    margin-right: 24px;
+
+    .form-check-input {
+      cursor: pointer;
+
+      &:checked {
+        background-color: $primary-color;
+        border-color: $primary-color;
+      }
+    }
+
+    .form-check-label {
+      font-weight: 500;
+      color: $text-dark;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $text-dark;
+}
+
+.form-select,
+.form-control {
+  height: 44px;
+  border-radius: 6px;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba(0, 31, 92, 0.15);
+  }
+}
+
+
+
+.swap-btn,
+.btn-outline-secondary {
+  height: 44px;
+  width: 100%;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary-color;
+    color: #fff;
+    border-color: $primary-color;
+  }
+}
+
+
+
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  font-weight: 600;
+  height: 44px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary-hover;
+    border-color: $primary-hover;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+
+
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 70px 20px 100px;
+
+    .hero-content h1 {
+      font-size: 36px;
+    }
+  }
+
+  .search-card {
+    margin-top: -60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 20px 80px;
+
+    .hero-content h1 {
+      font-size: 28px;
+    }
+  }
+
+  .search-form {
+    padding: 20px !important;
+  }
+}

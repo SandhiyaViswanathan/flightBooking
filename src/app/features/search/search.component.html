@@ -1,0 +1,111 @@
+<div class="search-container">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>The best airline tickets and airfares for cheap flights</h1>
+    </div>
+  </div>
+
+  <div class="search-card container">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
+      <div class="trip-type mb-4">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="tripType"
+            value="roundTrip"
+          />
+          <label class="form-check-label">Return</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="tripType"
+            value="oneWay"
+          />
+          <label class="form-check-label">One-Way</label>
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label">From</label>
+          <select class="form-select" formControlName="from">
+            <option value="">Select</option>
+            <option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-1 text-center">
+          <button
+            type="button"
+            class="btn btn-outline-secondary mt-4"
+            (click)="swapCities()"
+          >
+            ↔
+          </button>
+        </div>
+
+        <!-- To -->
+        <div class="col-md-3">
+          <label class="form-label">To</label>
+          <select class="form-select" formControlName="to">
+            <option value="">Select</option>
+            <option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Departure -->
+        <div class="col-md-2">
+          <label class="form-label">Departure</label>
+          <input
+            type="date"
+            class="form-control"
+            formControlName="departureDate"
+          />
+        </div>
+
+        <!-- Return -->
+        <div class="col-md-2" *ngIf="searchForm.value.tripType === 'roundTrip'">
+          <label class="form-label">Return</label>
+          <input
+            type="date"
+            class="form-control"
+            formControlName="returnDate"
+          />
+          <div
+            class="text-danger small mt-1"
+            *ngIf="searchForm.errors?.['returnRequired'] && searchForm.value.tripType === 'roundTrip' && searchForm.value.departureDate"
+          >
+            Return date is required for round trip.
+          </div>
+
+          <div
+            class="text-danger small mt-1"
+            *ngIf="searchForm.errors?.['invalidReturnDate'] && searchForm.value.tripType === 'roundTrip' && searchForm.value.departureDate"
+          >
+            Return date must be after departure date.
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <div class="col-md-2 d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary mt-4"
+            [disabled]="searchForm.invalid"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

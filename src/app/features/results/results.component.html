@@ -1,0 +1,41 @@
+<div class="results-container">
+  <div class="results-header">
+    <h1>Available Flights</h1>
+    <p>Choose from {{ filteredFlights.length }} flights</p>
+  </div>
+
+  <div class="results-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <app-filter-sidebar (filterChange)="onFilterChange($event)"></app-filter-sidebar>
+    </aside>
+
+    <!-- Results -->
+    <main class="results-main">
+      <!-- Sort Options -->
+      <div class="sort-section">
+        <label for="sort">Sort by:</label>
+        <select id="sort" [(ngModel)]="sortBy" (change)="onSortChange()">
+          <option value="price">Price (Low to High)</option>
+          <option value="duration">Duration (Short to Long)</option>
+          <option value="departure">Departure Time</option>
+        </select>
+      </div>
+
+      <!-- Flights List -->
+      <div class="flights-grid" *ngIf="filteredFlights.length > 0">
+        <app-flight-card 
+          *ngFor="let flight of filteredFlights" 
+          [flight]="flight"
+          (bookClick)="onBookFlight($event)">
+        </app-flight-card>
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" *ngIf="filteredFlights.length === 0">
+        <p>No flights found matching your criteria.</p>
+        <button (click)="filteredFlights = flights" class="btn btn-secondary">Clear Filters</button>
+      </div>
+    </main>
+  </div>
+</div>

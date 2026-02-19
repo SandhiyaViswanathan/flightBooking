@@ -1,0 +1,111 @@
+.results-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+
+  .results-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    p {
+      margin: 8px 0 0 0;
+      font-size: 16px;
+      color: #666;
+    }
+  }
+
+  .results-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      @media (max-width: 768px) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .results-main {
+      .sort-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        padding: 16px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+
+        label {
+          font-size: 14px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        select {
+          flex: 1;
+          padding: 8px 12px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+          background-color: white;
+          cursor: pointer;
+
+          &:focus {
+            outline: none;
+            border-color: #007bff;
+          }
+        }
+      }
+
+      .flights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 20px;
+
+        @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 40px 20px;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+
+        p {
+          margin: 0 0 16px 0;
+          font-size: 16px;
+          color: #666;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 14px;
+
+          &:hover {
+            background-color: #0056b3;
+          }
+        }
+      }
+    }
+  }
+}

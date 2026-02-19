@@ -1,0 +1,97 @@
+<div class="confirmation-container" *ngIf="booking">
+  <div class="confirmation-success">
+    <div class="success-icon">✓</div>
+    <h1>Booking Confirmed!</h1>
+    <p>Your flight has been successfully booked</p>
+  </div>
+
+  <div class="confirmation-content">
+    <!-- Reference ID -->
+    <div class="reference-section">
+      <h2>Booking Reference</h2>
+      <div class="reference-box">
+        <p class="reference-id">{{ booking.referenceId }}</p>
+        <p class="reference-text">Save this reference for your records</p>
+      </div>
+    </div>
+
+    <!-- Passenger Details -->
+    <div class="details-section">
+      <h2>Passenger Details</h2>
+      <div class="details-grid">
+        <div class="detail-row">
+          <span class="label">Name:</span>
+          <span class="value">{{ booking.bookingData.fullName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Email:</span>
+          <span class="value">{{ booking.bookingData.email }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Contact:</span>
+          <span class="value">{{ booking.bookingData.contactNumber }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Number of Passengers:</span>
+          <span class="value">{{ booking.bookingData.numberOfPassengers }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flight Details -->
+    <div class="flight-section">
+      <h2>Flight Details</h2>
+      <div class="flight-info">
+        <div class="info-row">
+          <span class="label">Airline:</span>
+          <span class="value">{{ booking.flight.airline }} ({{ booking.flight.flightNumber }})</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Route:</span>
+          <span class="value">{{ booking.flight.from }} → {{ booking.flight.to }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Departure:</span>
+          <span class="value">{{ booking.flight.departureTime }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Arrival:</span>
+          <span class="value">{{ booking.flight.arrivalTime }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Duration:</span>
+          <span class="value">{{ booking.flight.duration }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Summary -->
+    <div class="price-section">
+      <h2>Price Summary</h2>
+      <div class="price-details">
+        <div class="price-row">
+          <span>Price per Passenger:</span>
+          <span>${{ booking.flight.price }}</span>
+        </div>
+        <div class="price-row">
+          <span>Number of Passengers:</span>
+          <span>{{ booking.bookingData.numberOfPassengers }}</span>
+        </div>
+        <div class="price-row total">
+          <span>Total Amount:</span>
+          <span>${{ booking.totalPrice }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Date -->
+    <div class="date-section">
+      <p>Booking confirmed on {{ booking.bookingDate | date: 'medium' }}</p>
+    </div>
+
+    <!-- Action Button -->
+    <div class="action-section">
+      <button class="btn btn-primary" (click)="onBackToSearch()">Search for More Flights</button>
+    </div>
+  </div>
+</div>

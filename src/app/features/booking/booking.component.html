@@ -1,0 +1,130 @@
+<div class="booking-container">
+  <div class="booking-header">
+    <h1>Complete Your Booking</h1>
+  </div>
+
+  <div class="booking-content">
+    <!-- Flight Summary -->
+    <div class="flight-summary" *ngIf="selectedFlight">
+      <h2>Flight Details</h2>
+      <div class="summary-info">
+        <div class="info-row">
+          <span class="label">Airline:</span>
+          <span class="value">{{ selectedFlight.airline }} ({{ selectedFlight.flightNumber }})</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Route:</span>
+          <span class="value">{{ selectedFlight.from }} → {{ selectedFlight.to }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Departure:</span>
+          <span class="value">{{ selectedFlight.departureTime }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Arrival:</span>
+          <span class="value">{{ selectedFlight.arrivalTime }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Duration:</span>
+          <span class="value">{{ selectedFlight.duration }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Price per Passenger:</span>
+          <span class="value">${{ selectedFlight.price }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="booking-form-container">
+      <h2>Passenger Information</h2>
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="form">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input 
+            type="text" 
+            id="fullName" 
+            formControlName="fullName"
+            placeholder="John Doe"
+            [class.error]="showErrors && fullName?.invalid">
+          <div class="error-message" *ngIf="showErrors && fullName?.invalid">
+            <span *ngIf="fullName?.errors?.['required']">Full name is required</span>
+            <span *ngIf="fullName?.errors?.['minlength']">Name must be at least 3 characters</span>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email"
+            placeholder="john@example.com"
+            [class.error]="showErrors && email?.invalid">
+          <div class="error-message" *ngIf="showErrors && email?.invalid">
+            <span *ngIf="email?.errors?.['required']">Email is required</span>
+            <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+          </div>
+        </div>
+
+        <!-- Contact Number -->
+        <div class="form-group">
+          <label for="contactNumber">Contact Number *</label>
+          <input 
+            type="tel" 
+            id="contactNumber" 
+            formControlName="contactNumber"
+            placeholder="+1234567890"
+            [class.error]="showErrors && contactNumber?.invalid">
+          <div class="error-message" *ngIf="showErrors && contactNumber?.invalid">
+            <span *ngIf="contactNumber?.errors?.['required']">Contact number is required</span>
+            <span *ngIf="contactNumber?.errors?.['pattern']">Please enter a valid phone number (at least 10 digits)</span>
+          </div>
+        </div>
+
+        <!-- Number of Passengers -->
+        <div class="form-group">
+          <label for="numberOfPassengers">Number of Passengers *</label>
+          <input 
+            type="number" 
+            id="numberOfPassengers" 
+            formControlName="numberOfPassengers"
+            min="1" 
+            max="9"
+            [class.error]="showErrors && numberOfPassengers?.invalid">
+          <div class="error-message" *ngIf="showErrors && numberOfPassengers?.invalid">
+            <span *ngIf="numberOfPassengers?.errors?.['required']">Number of passengers is required</span>
+            <span *ngIf="numberOfPassengers?.errors?.['min']">Minimum 1 passenger</span>
+            <span *ngIf="numberOfPassengers?.errors?.['max']">Maximum 9 passengers</span>
+          </div>
+        </div>
+
+        <!-- Price Summary -->
+        <div class="price-summary">
+          <div class="summary-row">
+            <span>Price per Passenger:</span>
+            <span>${{ selectedFlight?.price }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Number of Passengers:</span>
+            <span>{{ numberOfPassengers?.value }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total Price:</span>
+            <span>${{ getTotalPrice() }}</span>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="form-buttons">
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="bookingForm.invalid && showErrors">
+            Proceed to Confirmation
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

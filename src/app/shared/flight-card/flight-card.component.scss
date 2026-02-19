@@ -1,0 +1,143 @@
+.flight-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 12px;
+
+    .airline-info {
+      h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .flight-number {
+        margin: 4px 0 0 0;
+        font-size: 12px;
+        color: #666;
+      }
+    }
+  }
+
+  .card-body {
+    margin-bottom: 16px;
+
+    .route {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      .location {
+        flex: 1;
+        text-align: center;
+
+        .time {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .city {
+          margin: 4px 0 0 0;
+          font-size: 14px;
+          color: #666;
+        }
+      }
+
+      .duration {
+        flex: 1;
+        text-align: center;
+        margin: 0 12px;
+
+        p {
+          margin: 0;
+          font-size: 12px;
+          color: #999;
+          margin-bottom: 8px;
+        }
+
+        .line {
+          height: 2px;
+          background: linear-gradient(to right, #007bff, transparent);
+          position: relative;
+
+          &::after {
+            content: '✈';
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            color: #007bff;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .price-seats {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 12px;
+      border-top: 1px solid #f0f0f0;
+
+      .price,
+      .seats {
+        text-align: center;
+
+        .label {
+          margin: 0;
+          font-size: 12px;
+          color: #999;
+          text-transform: uppercase;
+        }
+
+        h3,
+        .seats-count {
+          margin: 4px 0 0 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .card-footer {
+    text-align: center;
+
+    .btn {
+      width: 100%;
+      padding: 10px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}

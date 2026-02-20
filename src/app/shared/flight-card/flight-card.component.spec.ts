@@ -46,8 +46,8 @@ describe('FlightCardComponent', () => {
 
   it('should display route information', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.textContent).toContain('New York');
-    expect(compiled.textContent).toContain('London');
+    expect(compiled.textContent).toContain('Bangalore');
+    expect(compiled.textContent).toContain('Chennai');
   });
 
   it('should display times', () => {

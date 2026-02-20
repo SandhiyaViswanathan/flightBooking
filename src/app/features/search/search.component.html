@@ -70,6 +70,19 @@
             class="form-control"
             formControlName="departureDate"
           />
+            <div
+                class="text-danger small mt-1"
+                *ngIf="searchForm.errors?.['departureRequired'] && searchForm.value.departureDate === ''"
+            >
+                Departure date is required.
+            </div>
+            <div 
+                class="text-danger small mt-1"
+                *ngIf="searchForm.errors?.['invalidDepartureDate'] && searchForm.value.departureDate !== ''"
+            >
+
+                Departure date cannot be in the past.
+                    </div>  
         </div>
 
         <!-- Return -->

@@ -32,17 +32,23 @@ export class ResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const navigationState = this.router.getCurrentNavigation()?.extras?.state || (history && history.state);
-
-    if (navigationState && Object.keys(navigationState).length) {
-      this.searchCriteria = navigationState;
+   
+      this.flightService.searchCriteriaSubject.subscribe(criteria => {
+        this.searchCriteria = criteria;
+        this.loadFlights();
+      });
       console.log('Received search criteria:', this.searchCriteria);
+      
+  }
+
+  loadFlights(): void {
+    if (this.searchCriteria) {
       // Use service to perform a search (simulated) and then filter by from/to
       this.flightService.searchFlights(this.searchCriteria).subscribe((flights: Flight[]) => {
         // Narrow results by origin/destination from the search criteria
         this.flights = flights.filter(f => {
-          const matchesFrom = !this.searchCriteria.from || f.from === this.searchCriteria.from;
-          const matchesTo = !this.searchCriteria.to || f.to === this.searchCriteria.to;
+          const matchesFrom = f.from === this.searchCriteria.from;
+          const matchesTo = f.to === this.searchCriteria.to;
           return matchesFrom && matchesTo;
         });
 
@@ -53,7 +59,7 @@ export class ResultsComponent implements OnInit {
       this.flights = this.flightService.getFlights();
       this.filteredFlights = [...this.flights];
     }
-  }
+}
 
   onFilterChange(filters: any): void {
     this.filters = filters;

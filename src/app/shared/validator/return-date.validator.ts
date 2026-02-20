@@ -21,3 +21,16 @@ export const returnDateValidator: ValidatorFn = (
 
   return null;
 };
+
+export const invalidDepartureDateValidator: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  const departureDate = control.get('departureDate')?.value;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set to start of the day  
+  if (departureDate && new Date(departureDate) < today) {
+    return { invalidDepartureDate: true };
+  }
+
+  return null;
+};

@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { returnDateValidator } from '../../shared/validator/return-date.validator';
+import { returnDateValidator, invalidDepartureDateValidator } from '../../shared/validator/return-date.validator';
+import { FlightService } from '../../core/services/flight.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class SearchComponent {
   cities = ['Chennai', 'Delhi', 'Mumbai', 'Bangalore', 'Hyderabad'];
 
   constructor(private fb: FormBuilder,
-              private router: Router) {
+              private router: Router,
+              private flightService: FlightService) {
 
     this.searchForm = this.fb.group({
       tripType: ['roundTrip'],
@@ -29,7 +31,8 @@ export class SearchComponent {
       departureDate: ['', Validators.required],
       returnDate: ['']
     },
-    { validators: returnDateValidator } );
+    { validators: [returnDateValidator,invalidDepartureDateValidator] },
+    );
   }
 
   swapCities() {
@@ -44,9 +47,7 @@ export class SearchComponent {
 
   onSearch() {
     if (this.searchForm.invalid) return;
-
-    this.router.navigate(['/results'], {
-      state: this.searchForm.value
-    });
+    this.flightService.searchCriteriaSubject.next(this.searchForm.value);
+    this.router.navigate(['/results']);
   }
 }

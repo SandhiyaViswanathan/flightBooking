@@ -8,11 +8,9 @@ import { Flight, SearchCriteria, BookingData, Booking } from '../models/flight.m
 })
 export class FlightService {
   private flights: Flight[] = [];
-  private searchCriteriaSubject = new BehaviorSubject<SearchCriteria | null>(null);
+  public searchCriteriaSubject = new BehaviorSubject<SearchCriteria | null>(null);
   private selectedFlightSubject = new BehaviorSubject<Flight | null>(null);
   private bookingDataSubject = new BehaviorSubject<BookingData | null>(null);
-
-  searchCriteria$ = this.searchCriteriaSubject.asObservable();
   selectedFlight$ = this.selectedFlightSubject.asObservable();
   bookingData$ = this.bookingDataSubject.asObservable();
 
@@ -33,7 +31,6 @@ export class FlightService {
   }
 
   searchFlights(criteria: SearchCriteria): Observable<Flight[]> {
-    this.searchCriteriaSubject.next(criteria);
     return new Observable(observer => {
       // Simulate API delay
       setTimeout(() => {
